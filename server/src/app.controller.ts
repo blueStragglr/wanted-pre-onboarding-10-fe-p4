@@ -50,9 +50,6 @@ export class AppController {
   @Get('/all-items')
   async getAllItems(@Request() req) {
     // 실제로는 좀 더 재활용 가능한 형태로 엄격하게 구현됩니다.
-    console.log('reqUser:', req.user)
-    const currentUser = await this.usersService.findOne(req.user)
-    console.log(currentUser)
     if (!req.user.userInfo.roles.includes('admin')) throw new HttpException('권한이 없습니다.', 403);
     return this.usersService.getAllItems();
   }

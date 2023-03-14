@@ -15,7 +15,7 @@ async function bootstrap() {
   });
 
   app.use(session({
-    secret: '원티드 3월 FE 프리온보딩 코스 실습용 예제',
+    secret: '원티드 10월 FE 프리온보딩 코스 실습용 예제',
     resave: false,
     saveUninitialized: true,
     cookie: {

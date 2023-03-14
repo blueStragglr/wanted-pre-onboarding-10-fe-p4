@@ -2,20 +2,21 @@ import React from 'react'
 import { SidebarElement } from '../types/sidebar'
 import { useRouter } from '../hooks/useRouter'
 import { logout } from '../api/login'
-import { AdminRole, User } from '../types/user'
-import { useRecoilValue } from 'recoil'
+import { AdminRole } from '../types/user'
+import { useRecoilState } from 'recoil'
 import { UserAtom } from '../atoms/user'
 
 interface SidebarProps {
   sidebarContent: SidebarElement[]
   // TODO 4-2: Recoil atom `UserAtom`을 이용해 userProfile 값 대체 및 props type 삭제
-  userProfile: User | null
+  // userProfile: User | null
 }
 
 // TODO 4-2: Recoil atom `UserAtom`을 이용해 userProfile 값 대체 및 props 삭제
-const Sidebar: React.FC<SidebarProps> = ({ sidebarContent, userProfile }) => {
+const Sidebar: React.FC<SidebarProps> = ({ sidebarContent }) => {
   // TODO 4-2: Recoil atom `UserAtom`을 이용해 userProfile 값 집어넣기
   // hint: useRecoilValue
+  const [userProfile, setUserProfile] = useRecoilState(UserAtom)
 
   const { currentPath, routeTo } = useRouter()
 
@@ -25,6 +26,9 @@ const Sidebar: React.FC<SidebarProps> = ({ sidebarContent, userProfile }) => {
 
   // TODO 4-2: 로그아웃 호출
   const logoutHandler = async () => {
+    await logout()
+    setUserProfile(null)
+    routeTo('/')
   }
 
   return (<div className="sidebar">
@@ -36,7 +40,7 @@ const Sidebar: React.FC<SidebarProps> = ({ sidebarContent, userProfile }) => {
         .filter((element ) => {
           // TODO 4-1: element.isAdminOnly가 true일 때
           //  admin user(userProfile.userInfo.roles에 'admin'이 포함됨)에게만 메뉴 보여주기
-          return true
+          return element.isAdminOnly ? userProfile?.userInfo.roles.includes('admin') : !!userProfile
         })
         .map((element) => {
         return (<li
