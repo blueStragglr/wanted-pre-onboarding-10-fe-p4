@@ -1,0 +1,11 @@
+{
+  "name": "wanted-pre-onboarding-fe-practices-4",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "initialize": "cd client && yarn && cd ../server && yarn",
+    "client": "cd client && yarn dev",
+    "server": "cd server && yarn start"
+  }
+}
