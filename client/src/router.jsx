@@ -1,33 +1,31 @@
-import { SidebarElement } from './types/sidebar'
 import { createBrowserRouter } from 'react-router-dom'
-import { Router as RemixRouter } from '@remix-run/router/dist/router'
-import Home from './pages/Home'
-import GeneralLayout from './layout/GeneralLayout'
-import Login from './pages/Login'
-import PageA from './pages/PageA'
-import PageB from './pages/PageB'
-import PageC from './pages/PageC'
-import AdminPage from './pages/AdminPage'
+import Home from './pages/Home.jsx'
+import GeneralLayout from './layout/GeneralLayout.jsx'
+import Login from './pages/Login.jsx'
+import PageA from './pages/PageA.jsx'
+import PageB from './pages/PageB.jsx'
+import PageC from './pages/PageC.jsx'
+import AdminPage from './pages/AdminPage.jsx'
+//
+// interface RouterBase {
+//   id: number // 페이지 아이디 (반복문용 고유값)
+//   path: string // 페이지 경로
+//   label: string // 사이드바에 표시할 페이지 이름
+//   element: React.ReactNode // 페이지 엘리먼트
+// }
+//
+// interface UserAccessibleRouterElement extends RouterBase {
+//   withAuth?: boolean // 인증이 필요한 페이지 여부
+// }
+//
+// interface AdminAccessibleRouterElement extends RouterBase {
+//   withAuth: true // 인증이 필요한 페이지 여부
+//   isAdminPage?: boolean // 어드민 페이지 여부
+// }
+//
+// type RouterElement = UserAccessibleRouterElement | AdminAccessibleRouterElement
 
-interface RouterBase {
-  id: number // 페이지 아이디 (반복문용 고유값)
-  path: string // 페이지 경로
-  label: string // 사이드바에 표시할 페이지 이름
-  element: React.ReactNode // 페이지 엘리먼트
-}
-
-interface UserAccessibleRouterElement extends RouterBase {
-  withAuth?: boolean // 인증이 필요한 페이지 여부
-}
-
-interface AdminAccessibleRouterElement extends RouterBase {
-  withAuth: true // 인증이 필요한 페이지 여부
-  isAdminPage?: boolean // 어드민 페이지 여부
-}
-
-type RouterElement = UserAccessibleRouterElement | AdminAccessibleRouterElement
-
-const routerData: RouterElement[] = [
+const routerData = [
   {
     id: 0,
     path: '/',
@@ -66,7 +64,7 @@ const routerData: RouterElement[] = [
   // TODO 4-1: Admin페이지를 router에 추가
 ]
 
-export const routers: RemixRouter = createBrowserRouter(
+export const routers = createBrowserRouter(
   // TODO 4-1: 어드민 전용 페이지이거나 auth가 필요한 페이지는 GeneralLayout으로 감싸기
   // 어드민 전용 페이지는 isAdminPage = true를 전달
   routerData.map((router) => {
@@ -84,7 +82,7 @@ export const routers: RemixRouter = createBrowserRouter(
   })
 )
 
-export const SidebarContent: SidebarElement[] = routerData.reduce((prev, router) => {
+export const SidebarContent = routerData.reduce((prev, router) => {
   // TODO 4-1. isAdminOnly 프로퍼티를 추가하여 admin 페이지로 가는 사이드바 요소를 선택적으로 렌더링 (어드민에게만 보이도록 하기)
   if (!router.withAuth) return prev
 
@@ -96,4 +94,4 @@ export const SidebarContent: SidebarElement[] = routerData.reduce((prev, router)
       label: router.label,
     }
   ]
-}, [] as SidebarElement[])
+}, [])

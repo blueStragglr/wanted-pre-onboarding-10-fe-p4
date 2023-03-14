@@ -1,14 +1,6 @@
-import { Item, User } from '../types/user'
-import { BASE_URL } from './const'
+import { BASE_URL } from './const.js'
 
-type LoginResult = 'success' | 'fail'
-
-export interface LoginRequest {
-  username: string
-  password: string
-}
-
-export const login = async (args: LoginRequest): Promise<LoginResult> => {
+export const login = async (args) => {
   const loginRes = await fetch(`${BASE_URL}/auth/login`, {
     method: 'POST',
     headers: {
@@ -21,7 +13,7 @@ export const login = async (args: LoginRequest): Promise<LoginResult> => {
   return loginRes.ok ? 'success' : 'fail'
 }
 
-export const getCurrentUserInfo = async (): Promise<User | null> => {
+export const getCurrentUserInfo = async () => {
   const userInfoRes = await fetch(`${ BASE_URL }/profile`, {
     method: 'GET',
     headers: {
@@ -34,16 +26,15 @@ export const getCurrentUserInfo = async (): Promise<User | null> => {
 }
 
 // TODO 4-2: GET, '/items' 호출
-export const getItems = async (): Promise<Item[] | null> => {
+export const getItems = async () => {
   return null
 }
 
 // TODO 4-2: GET, '/all-items' 호출
-export const getAllItems = async (): Promise<Item[] | null> => {
+export const getAllItems = async () => {
   return null
 }
 
-
 // TODO 4-2: POST, '/logout' 호출
-export const logout = async (): Promise<void> => {
+export const logout = async () => {
 }

@@ -1,10 +1,9 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react'
-import { Item } from '../types/user'
-import { getItems } from '../api/login'
-import ItemList from '../components/ItemList'
+import { getItems } from '../api/login.js'
+import ItemList from '../components/ItemList.jsx'
 
 const PageA = () => {
-  const [ items, setItems ] = useState<Item[] | null>(null)
+  const [ items, setItems ] = useState(null)
   const isUserItemsFetched = useRef(false)
 
   // TODO 4-2: getItems를 호출하여 userItem을 가져온 경우 상태 업데이트

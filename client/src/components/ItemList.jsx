@@ -1,11 +1,10 @@
 import React from 'react';
-import { Item } from '../types/user'
 
-interface ItemListProps {
-  items: Item[] |  null
-}
+// interface ItemListProps {
+//   items: Item[] |  null
+// }
 
-const ItemList: React.FC<ItemListProps> = ({items}) => {
+const ItemList = ({items}) => {
   return (<p>
       {items?.map((item) => {
         return <div key={item.id}>

@@ -1,6 +1,6 @@
 import { RouterProvider } from 'react-router-dom'
 import './App.css'
-import { routers } from './router'
+import { routers } from './router.jsx'
 import { RecoilRoot } from 'recoil'
 
 function App() {

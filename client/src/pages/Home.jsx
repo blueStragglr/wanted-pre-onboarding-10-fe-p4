@@ -1,5 +1,5 @@
 import React from 'react'
-import { useRouter } from '../hooks/useRouter'
+import { useRouter } from '../hooks/useRouter.js'
 
 const Home = () => {
   const { routeTo } = useRouter()

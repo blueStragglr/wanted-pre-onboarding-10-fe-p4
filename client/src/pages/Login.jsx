@@ -1,29 +1,29 @@
 import React from 'react';
-import { getCurrentUserInfo, login } from '../api/login'
-import { useRouter } from '../hooks/useRouter'
+import { getCurrentUserInfo, login } from '../api/login.js'
+import { useRouter } from '../hooks/useRouter.js'
 
 const Login = () => {
   const { routeTo } = useRouter()
 
-  const isLoggedIn = async (): Promise<boolean> => {
+  const isLoggedIn = async () => {
     const userProfileResponse = await getCurrentUserInfo()
     return userProfileResponse !== null
   }
 
-  const loginSubmitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
+  const loginSubmitHandler = async (event) => {
     event.preventDefault();
     // FormData를 이용해서 로그인 시도
     const formData = new FormData(event.currentTarget)
 
-    const isUserLoggedIn: boolean = await isLoggedIn()
+    const isUserLoggedIn = await isLoggedIn()
     if (isUserLoggedIn) {
       routeTo('/page-a')
       return
     }
 
     const loginResult = await login({
-      username: formData.get('username') as string,
-      password: formData.get('password') as string
+      username: formData.get('username'),
+      password: formData.get('password')
     })
 
     if (loginResult === 'fail') {

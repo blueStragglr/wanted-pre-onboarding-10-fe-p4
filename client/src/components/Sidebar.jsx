@@ -1,25 +1,23 @@
 import React from 'react'
-import { SidebarElement } from '../types/sidebar'
-import { useRouter } from '../hooks/useRouter'
-import { logout } from '../api/login'
-import { AdminRole, User } from '../types/user'
+import { useRouter } from '../hooks/useRouter.js'
+import { logout } from '../api/login.js'
 import { useRecoilValue } from 'recoil'
-import { UserAtom } from '../atoms/user'
+import { UserAtom } from '../atoms/user.js'
 
-interface SidebarProps {
-  sidebarContent: SidebarElement[]
-  // TODO 4-2: Recoil atom `UserAtom`을 이용해 userProfile 값 대체 및 props type 삭제
-  userProfile: User | null
-}
+// interface SidebarProps {
+//   sidebarContent: SidebarElement[]
+//   // TODO 4-2: Recoil atom `UserAtom`을 이용해 userProfile 값 대체 및 props type 삭제
+//   userProfile: User | null
+// }
 
 // TODO 4-2: Recoil atom `UserAtom`을 이용해 userProfile 값 대체 및 props 삭제
-const Sidebar: React.FC<SidebarProps> = ({ sidebarContent, userProfile }) => {
+const Sidebar = ({ sidebarContent, userProfile }) => {
   // TODO 4-2: Recoil atom `UserAtom`을 이용해 userProfile 값 집어넣기
   // hint: useRecoilValue
 
   const { currentPath, routeTo } = useRouter()
 
-  const sidebarMenuClickHandler = (path: string) => {
+  const sidebarMenuClickHandler = (path) => {
     routeTo(path)
   }
 
@@ -51,7 +49,7 @@ const Sidebar: React.FC<SidebarProps> = ({ sidebarContent, userProfile }) => {
     <div>
       { userProfile
         ? <div className="sidebar-footer">
-          {userProfile?.userInfo?.name}{userProfile?.userInfo?.roles.includes(AdminRole) ? '(admin)' : ''}님 환영합니다.
+          {userProfile?.userInfo?.name}{userProfile?.userInfo?.roles.includes('admin') ? '(admin)' : ''}님 환영합니다.
           <button className={'small'} onClick={logoutHandler}>
             로그아웃
           </button>

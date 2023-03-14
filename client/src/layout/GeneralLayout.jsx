@@ -1,20 +1,14 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import Sidebar from '../components/Sidebar'
-import { SidebarContent } from '../router'
-import { getCurrentUserInfo } from '../api/login'
-import { AdminRole, User } from '../types/user'
-import { useRouter } from '../hooks/useRouter'
+import Sidebar from '../components/Sidebar.jsx'
+import { SidebarContent } from '../router.jsx'
+import { getCurrentUserInfo } from '../api/login.js'
+import { useRouter } from '../hooks/useRouter.js'
 import { useRecoilState } from 'recoil'
-import { UserAtom } from '../atoms/user'
+import { UserAtom } from '../atoms/user.js'
 
-interface GeneralLayoutProps {
-  children: React.ReactNode
-  isAdminPage?: boolean
-}
-
-const GeneralLayout: React.FC<GeneralLayoutProps> = ({children, isAdminPage}) => {
+const GeneralLayout = ({children, isAdminPage}) => {
   {/* TODO 4-2: Recoil atom `UserAtom`을 이용해 userProfile props 대체 및 삭제 */}
-  const [ userProfile, setUserProfile ] = useState<User | null>(null)
+  const [ userProfile, setUserProfile ] = useState(null)
   const {routeTo} = useRouter()
 
   const fetchUserProfile = useCallback(async () => {
@@ -41,7 +35,7 @@ const GeneralLayout: React.FC<GeneralLayoutProps> = ({children, isAdminPage}) =>
 
 
   // TODO 4-1: Admin 전용 페이지 접근 시도시 userProfile.userInfo.roles에 admin이 없는 경우에는 page-a로 이동
-  if (isAdminPage && !userProfile?.userInfo.roles.includes(AdminRole)) {
+  if (isAdminPage && !userProfile?.userInfo.roles.includes('admin')) {
     routeTo('/page-a')
     return <></>
   }

@@ -1,4 +1,4 @@
-# Wanted Pre-onboarding 3월 FE 코스 4일차 실습
+# Wanted Pre-onboarding 10월 FE 코스 4일차 실습
 
 > 4일차 실습을 위한 스켈레톤 코드 및 샘플 서버입니다. 강의를 듣고 설명에 따라 실습을 진행해보세요!
 
@@ -85,29 +85,28 @@
         }
       ```
 
-
 3. 유저의 item 가져오기 (GET `/items`)
-   - 세션에 저장된 유저 정보를 확인하여 해당 유저 소유로 저장된 모든 item을 가져옵니다.
-   - 반환되는 데이터 타입은 다음과 같습니다.
-     ```tsx
-     export interface Item {
-        id: number // pk
-        owner: {
-           userId: number
-        },
-        content: {
-           title: string
-           body: string
-        }
-     }
-     
-     const response: Items[] = [...]
-     ```
-
+    - 세션에 저장된 유저 정보를 확인하여 해당 유저 소유로 저장된 모든 item을 가져옵니다.
+    - 반환되는 데이터 타입은 다음과 같습니다.
+      ```tsx
+      export interface Item {
+         id: number // pk
+         owner: {
+            userId: number
+         },
+         content: {
+            title: string
+            body: string
+         }
+      }
+      
+      const response: Items[] = [...]
+      ```
+   
 4. 모든 유저의 item 가져오기 (GET `/all-items`, admin 전용)
-   - 세션에 저장된 유저가 admin일 때만 호출할 수 있습니다.
-   - 서버에서 validation 하므로, 클라이언트에서는 별도로 필터링하지 않아도 됩니다.
-   - 반환되는 데이터 타입은 다음과 같습니다.
+    - 세션에 저장된 유저가 admin일 때만 호출할 수 있습니다.
+    - 서버에서 validation 하므로, 클라이언트에서는 별도로 필터링하지 않아도 됩니다.
+    - 반환되는 데이터 타입은 다음과 같습니다.
     ```tsx
     export interface Item {
        id: number // pk
@@ -124,6 +123,5 @@
     ```
 
 5. 로그아웃 (POST, `/logout`)
-   - 현재 유저가 로그인되어 있는 세션을 destroy합니다.
-   - 응답으로 메시지가 오긴 하지만, 사용하지 않아도 됩니다.
-
+    - 현재 유저가 로그인되어 있는 세션을 destroy합니다.
+    - 응답으로 메시지가 오긴 하지만, 사용하지 않아도 됩니다.
